@@ -5,12 +5,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wacky Widgets</title>
+  <title>Tedious Tasks</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
-  <h1>Wacky Widgets</h1>
-  
+  <h1>Tedious Tasks</h1>
+  {% if tasks|length == 0 %}
+    <h3>No Tasks Exist</h3>
+  {% else %}
+    <table class="pure-table pure-table-striped">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Time</th>
+          <th>Person</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      {% for task in tasks %}
+        <tr>
+          <td> {{ task.description }}</td>
+          <td> {{ task.time }}</td>
+          <td> {{ task.person }}</td>
+          <td> <a href="/delete_task/{{ task.id }}">X</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+  <hr>
+  <h4>Add Task</h4>
+  <form class="pure_form" action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="pure-button" type="submit" value="ADD WIDGET">
+</form>
 </body>
 </html>
