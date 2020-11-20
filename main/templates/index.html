@@ -32,6 +32,14 @@
           <td> <a href="/delete_task/{{ task.id }}">X</a></td>
         </tr>
       {% endfor %}
+      <tfoot>
+        <tr>
+          <th>Total Time</th>
+          <th>{{ total_time.time__sum }}</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </tfoot>
     </table>
   {% endif %}
   <hr>
